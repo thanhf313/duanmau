@@ -8,7 +8,5 @@ public class PhieuMuonDao {
     DbHelper dbHelper;
     public PhieuMuonDao(Context context){
         dbHelper = new DbHelper(context);
-
-
     }
 }
