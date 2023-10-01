@@ -36,6 +36,9 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("insert into SACH values" +
                 "(1,'Thánh giống',10000,1),(2,'Titanic',30000,2),(3,'Qúa nhanh quá nguy hiểm',30200,4)");
         db.execSQL("insert into THUTHU values ('thuthu01','nguyễn trung thành','abc123'),('thuthu02','Thành','abc123')");
+        db.execSQL("insert into THANHVIEN values(1,'Nguyễn Văn A','2000'),(2,'Nguyễn Thị C','2001'),(3,'Lê Thị L','2000')");
+        // trả sách:1 đã trả,0 chưa trả
+        db.execSQL("insert into PHIEUMUON values(1,1,'thuthu01',2,'19/02/2023',1,3500),(2,3,'thuthu02',3,'25/09/2023',1,5000),(3,1,'thuthu02',3,'05/10/2023',1,5000)");
     }
 
     @Override
