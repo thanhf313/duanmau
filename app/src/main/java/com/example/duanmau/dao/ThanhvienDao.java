@@ -15,7 +15,7 @@ public class ThanhvienDao {
         dbHelper = new DbHelper(context);
     }
 
-    ArrayList<ThanhVien> getDSThanhVien(){
+    public  ArrayList<ThanhVien> getDSThanhVien(){
         ArrayList<ThanhVien> list = new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         Cursor cursor = database.rawQuery("select * from THANHVIEN",null);

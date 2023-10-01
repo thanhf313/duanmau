@@ -29,4 +29,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nhập tiền:"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="6dp">
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD"
+            android:layout_marginRight="10dp"
+            android:textSize="28dp"
+            android:backgroundTint="#11C819"/>
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_marginLeft="10dp"
+            android:textSize="24dp"
+            android:backgroundTint="#E42222"/>
+    </LinearLayout>
 </LinearLayout>
