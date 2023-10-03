@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,35 +39,34 @@ import java.util.Locale;
 
 public class QLPhieuMuonFragment extends Fragment {
     PhieuMuonDao phieuMuonDao;
+    RecyclerView recyclerView;
+    ArrayList<PhieuMuon> list;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_qlphieumuon,container,false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerwiewQLPhieumuon);
+         recyclerView = view.findViewById(R.id.recyclerwiewQLPhieumuon);
         FloatingActionButton floatingActionButton = view.findViewById(R.id.floatAdd);
 
-        // giao diện
-
-        // data
-         phieuMuonDao = new PhieuMuonDao(getContext());
-        ArrayList<PhieuMuon> list = phieuMuonDao.getDSPhieuMuon();
-
-        // adapter
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        PhieuMuonAdapter adapter = new PhieuMuonAdapter(list,getContext());
-        recyclerView.setAdapter(adapter);
+        loadData();
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
-
-
         });
         return view;
+    }
+    private  void  loadData(){
+        // adapter
+        phieuMuonDao = new PhieuMuonDao(getContext());
+        list = phieuMuonDao.getDSPhieuMuon();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        PhieuMuonAdapter adapter = new PhieuMuonAdapter(list,getContext());
+        recyclerView.setAdapter(adapter);
     }
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -96,6 +96,8 @@ public class QLPhieuMuonFragment extends Fragment {
                 HashMap<String, Object> hsSc = (HashMap<String, Object>) spnSach.getSelectedItem();
                 int maSach = (int) hsSc.get("maSach");
                 int tien = Integer.parseInt(edtTien.getText().toString());
+//                int tien = (int) hsSc.get("giaThue");
+
                 themPhieuMuon(maTV, maSach, tien);
             }
 
@@ -107,7 +109,6 @@ public class QLPhieuMuonFragment extends Fragment {
                 alertDialog.dismiss();
             }
         });
-
         alertDialog.show();
     }
     private  void  getDataThanhVien(Spinner spinnerTv){
@@ -140,13 +141,13 @@ public class QLPhieuMuonFragment extends Fragment {
             HashMap<String, Object> sc = new HashMap<>();
             sc.put("maSach", Sc.getMasach());
             sc.put("tenSach", Sc.getTensach());
+//            sc.put("giaThue", Sc.getGiathue());
             listSc.add(sc);
             // duyệt qua toàn bộ những thông tin của list
         }
         // gọi simAdapter để chuyển vào
         SimpleAdapter simpleAdapter = new SimpleAdapter(
                 getContext(), listSc, android.R.layout.simple_list_item_1, new String[]{"tenSach"},new int[]{android.R.id.text1}
-
         );
         spinnerSc.setAdapter(simpleAdapter);
     }
@@ -163,6 +164,13 @@ public class QLPhieuMuonFragment extends Fragment {
         String ngay = simpleDateFormat.format(date);
 
         PhieuMuon phieuMuon = new PhieuMuon(maTV, maTT, maSach, ngay, 0, tien);
+        boolean check = phieuMuonDao.themPhieuMuon(phieuMuon);
+        if (check){
+            Toast.makeText(getContext(), "Thêm phiếu mượn thành công", Toast.LENGTH_SHORT).show();
+            loadData();
+        }else {
+            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 

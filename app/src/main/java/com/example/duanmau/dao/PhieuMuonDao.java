@@ -22,7 +22,7 @@ public class PhieuMuonDao {
         if (cursor.getCount() != 0 ){
             cursor.moveToFirst();
             do {
-                list.add(new PhieuMuon(cursor.getInt(0), cursor.getInt(1), cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getString(6),cursor.getString(7),cursor.getInt(8),cursor.getInt(9)));
+                list.add(new PhieuMuon(cursor.getInt(0), cursor.getString(2), cursor.getInt(5),cursor.getString(6), cursor.getInt(8),cursor.getInt(9)));
             }while (cursor.moveToNext());
         }
         return list;
@@ -41,7 +41,7 @@ public class PhieuMuonDao {
     public boolean themPhieuMuon(PhieuMuon phieuMuon){
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("maPM", phieuMuon.getMapm());
+//        contentValues.put("maPM", phieuMuon.getMapm());
         contentValues.put("maTV", phieuMuon.getMatv());
         contentValues.put("maTT", phieuMuon.getMatt());
         contentValues.put("maSach", phieuMuon.getMasach());

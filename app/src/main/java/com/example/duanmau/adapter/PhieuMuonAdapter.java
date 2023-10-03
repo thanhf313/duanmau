@@ -39,7 +39,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.View
     @Override
     public void onBindViewHolder(@NonNull PhieuMuonAdapter.ViewHolder holder, int position) {
         holder.txtmaPM.setText("Mã PM: " + list.get(position).getMapm());
-        holder.txtmaTv.setText("Mã TV: " + list.get(position).getMatt());
+        holder.txtmaTv.setText("Mã TV: " + list.get(position).getMatv());
         holder.txttenTV.setText("Tên TV: " + list.get(position).getTentv());
         holder.txtmaTT.setText("Mã TT: " + list.get(position).getMatt());
         holder.txttenTT.setText("Tên TT: " + list.get(position).getTentt());
@@ -69,7 +69,6 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.View
                 }else {
                     Toast.makeText(context, "Thay đổi thất bại", Toast.LENGTH_SHORT).show();
                 }
-                return;
             }
         });
     }

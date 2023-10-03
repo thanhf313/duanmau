@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thành viên"
+        android:text="Loại sách"
         android:textSize="24dp"
         android:textColor="#A80E0E"/>
     <Spinner

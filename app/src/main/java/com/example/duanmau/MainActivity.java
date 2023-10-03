@@ -9,14 +9,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.duanmau.dao.SachDao;
 import com.example.duanmau.fragment.QLLoaiSachFragment;
 import com.example.duanmau.fragment.QLPhieuMuonFragment;
+import com.example.duanmau.screen.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +47,14 @@ public class MainActivity extends AppCompatActivity {
                    fragment = new QLPhieuMuonFragment();
                }else if (item.getItemId() == R.id.QLLoaiSach){
                     fragment = new QLLoaiSachFragment();
-               }else {
+               }else if (item.getItemId() == R.id.dangXuat){
+                    fragment = new Fragment();
+                   Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                   startActivity(intent);
+                   Toast.makeText(MainActivity.this, "Thoát thành công", Toast.LENGTH_SHORT).show();
+               }
+               else {
                    fragment = new QLPhieuMuonFragment();
                }
                 FragmentManager fragmentManager = getSupportFragmentManager();
