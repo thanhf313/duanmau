@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.duanmau.database.DbHelper;
 import com.example.duanmau.model.PhieuMuon;
@@ -22,7 +23,7 @@ public class PhieuMuonDao {
         if (cursor.getCount() != 0 ){
             cursor.moveToFirst();
             do {
-                list.add(new PhieuMuon(cursor.getInt(0), cursor.getString(2), cursor.getInt(5),cursor.getString(6), cursor.getInt(8),cursor.getInt(9)));
+                list.add(new PhieuMuon(cursor.getInt(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getString(6),cursor.getString(7),cursor.getInt(8),cursor.getInt(9)));
             }while (cursor.moveToNext());
         }
         return list;
@@ -38,6 +39,7 @@ public class PhieuMuonDao {
             return true;
         }
     }
+
     public boolean themPhieuMuon(PhieuMuon phieuMuon){
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -47,7 +49,8 @@ public class PhieuMuonDao {
         contentValues.put("maSach", phieuMuon.getMasach());
         contentValues.put("ngay", phieuMuon.getNgay());
         contentValues.put("traSach", phieuMuon.getTrasach());
-        contentValues.put("tienThue", phieuMuon.getTienthue());
+        contentValues.put("tienThue", phieuMuon.getTienthue()) ;
+
 
         long check = sqLiteDatabase.insert("PHIEUMUON", null, contentValues);
         if (check == -1){

@@ -41,6 +41,7 @@ public class QLPhieuMuonFragment extends Fragment {
     PhieuMuonDao phieuMuonDao;
     RecyclerView recyclerView;
     ArrayList<PhieuMuon> list;
+    PhieuMuonAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,15 +60,7 @@ public class QLPhieuMuonFragment extends Fragment {
         });
         return view;
     }
-    private  void  loadData(){
-        // adapter
-        phieuMuonDao = new PhieuMuonDao(getContext());
-        list = phieuMuonDao.getDSPhieuMuon();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        PhieuMuonAdapter adapter = new PhieuMuonAdapter(list,getContext());
-        recyclerView.setAdapter(adapter);
-    }
+
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
@@ -100,8 +93,6 @@ public class QLPhieuMuonFragment extends Fragment {
 
                 themPhieuMuon(maTV, maSach, tien);
             }
-
-
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +143,7 @@ public class QLPhieuMuonFragment extends Fragment {
         spinnerSc.setAdapter(simpleAdapter);
     }
 
-    // hàm cn
+//     hàm cn
     private void themPhieuMuon(int maTV, int maSach, int tien) {
         // lấy mã thuthu, gọi sharePre...
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("THONGTIN", Context.MODE_PRIVATE);
@@ -163,7 +154,7 @@ public class QLPhieuMuonFragment extends Fragment {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String ngay = simpleDateFormat.format(date);
 
-        PhieuMuon phieuMuon = new PhieuMuon(maTV, maTT, maSach, ngay, 0, tien);
+        PhieuMuon phieuMuon = new PhieuMuon(maTV,maTT, maSach,ngay,0,tien);
         boolean check = phieuMuonDao.themPhieuMuon(phieuMuon);
         if (check){
             Toast.makeText(getContext(), "Thêm phiếu mượn thành công", Toast.LENGTH_SHORT).show();
@@ -171,6 +162,16 @@ public class QLPhieuMuonFragment extends Fragment {
         }else {
             Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private  void  loadData(){
+        // adapter
+        phieuMuonDao = new PhieuMuonDao(getContext());
+        list = phieuMuonDao.getDSPhieuMuon();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new PhieuMuonAdapter(list,getContext());
+        recyclerView.setAdapter(adapter);
     }
 }
 
