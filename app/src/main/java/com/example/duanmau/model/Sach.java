@@ -6,6 +6,7 @@ public class Sach {
     private int giathue;
     private int maloai;
 
+    private int soluongdamuonsach;
     public Sach() {
     }
 
@@ -14,6 +15,20 @@ public class Sach {
         this.tensach = tensach;
         this.giathue = giathue;
         this.maloai = maloai;
+    }
+
+    public Sach(int masach, String tensach, int soluongdamuonsach) {
+        this.masach = masach;
+        this.tensach = tensach;
+        this.soluongdamuonsach = soluongdamuonsach;
+    }
+
+    public int getSoluongdamuonsach() {
+        return soluongdamuonsach;
+    }
+
+    public void setSoluongdamuonsach(int soluongdamuonsach) {
+        this.soluongdamuonsach = soluongdamuonsach;
     }
 
     public int getMasach() {

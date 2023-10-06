@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đổi mật khẩu"
+        android:textColor="#FF0000"
+        android:textSize="32dp"
+       />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtPassOld"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:hint="Nhập mật khẩu cũ: "/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtNewPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập mật khẩu mới: "
+            android:layout_marginBottom="5dp"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtReNewPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập lại mật khẩu: "
+            android:layout_marginBottom="5dp"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:padding="5dp">
+        <Button
+            android:id="@+id/btnLuu"
+            android:layout_width="140dp"
+            android:layout_height="70dp"
+            android:text="LƯU"
+            android:layout_marginRight="10dp"
+            android:textSize="28dp"
+            android:backgroundTint="#11C819"/>
+        <Button
+            android:id="@+id/btnHuy"
+            android:layout_width="140dp"
+            android:layout_height="70dp"
+            android:text="HỦY"
+            android:layout_marginLeft="10dp"
+            android:textSize="24dp"
+            android:backgroundTint="#E42222"/>
+    </LinearLayout>
+
+</LinearLayout>
