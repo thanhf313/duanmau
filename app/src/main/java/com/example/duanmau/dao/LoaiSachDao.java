@@ -38,4 +38,29 @@ public class LoaiSachDao {
         if (check == -1) return false;
         return true;
     }
+
+    // xóa loại sách: 1 > xóa thành công, 0 > xóa thất bại, -1 > xóa tồn tại (ràng buộc với khóa ngoại)
+    public  int xoaLoaiSach(int id){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+       Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM SACH WHERE maLoai=?", new String[]{String.valueOf(id)});
+       if (cursor.getCount() != 0 ){
+           return -1;
+       }
+
+       long check = sqLiteDatabase.delete("LOAISACH","maLoai=?",new String[]{String.valueOf(id)});
+       if (check == -1)
+           return 0;
+       return 1;
+    }
+
+    // sua
+    public  boolean suaThongTinLoaiSach(LoaiSach loaiSach){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("tenLoai",loaiSach.getTenLoai());
+        long check = sqLiteDatabase.update("LOAISACH",contentValues,"maLoai=?",new String[]{String.valueOf(loaiSach.getId())});
+        if (check == -1)
+            return false;
+        return true;
+    }
 }

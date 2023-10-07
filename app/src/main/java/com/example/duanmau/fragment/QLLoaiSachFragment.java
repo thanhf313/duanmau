@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.duanmau.R;
 import com.example.duanmau.adapter.LoaiSachAdapter;
 import com.example.duanmau.dao.LoaiSachDao;
+import com.example.duanmau.model.ItemClick;
 import com.example.duanmau.model.LoaiSach;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -25,16 +26,19 @@ public class QLLoaiSachFragment extends Fragment {
     LinearLayoutManager layoutManager;
     LoaiSachDao loaiSachDao;
     ArrayList<LoaiSach> list;
-    LoaiSachAdapter adapter;
+//    LoaiSachAdapter adapter;
     RecyclerView recyclerViewLoaiSach;
+    TextInputEditText edtLoaiSach;
+    int maloai;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_qlloaisach, container, false);
         recyclerViewLoaiSach = view.findViewById(R.id.recyclerSach);
-        TextInputEditText edtLoaiSach = view.findViewById(R.id.edtLoaiSach);
+         edtLoaiSach = view.findViewById(R.id.edtLoaiSach);
         Button btnThem = view.findViewById(R.id.btnThemSach);
+        Button btnSua = view.findViewById(R.id.btnSuaSach);
 
         loaiSachDao = new LoaiSachDao(getContext());
         load();
@@ -53,6 +57,21 @@ public class QLLoaiSachFragment extends Fragment {
                 }
             }
         });
+
+        btnSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tenloai = edtLoaiSach.getText().toString();
+                LoaiSach loaiSach = new LoaiSach(maloai,tenloai);
+                if (loaiSachDao.suaThongTinLoaiSach(loaiSach)){
+                    load();
+                    edtLoaiSach.setText("");
+                    Toast.makeText(getContext(), "Thay đổi thành công", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getContext(), "Thay đổi thông tin không thành công", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return view;
     }
 
@@ -60,7 +79,13 @@ public class QLLoaiSachFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerViewLoaiSach.setLayoutManager(layoutManager);
         list = loaiSachDao.getLoaiSach();
-        adapter = new LoaiSachAdapter(getContext(), list);
+        LoaiSachAdapter adapter = new LoaiSachAdapter(getContext(), list, new ItemClick() {
+            @Override
+            public void onClickLoaiSach(LoaiSach loaiSach) {
+                edtLoaiSach.setText(loaiSach.getTenLoai()); // hiên lên thành edtext
+                maloai = loaiSach.getId(); // có đc mã loại
+            }
+        });
         recyclerViewLoaiSach.setAdapter(adapter);
     }
 }
