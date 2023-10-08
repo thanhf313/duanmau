@@ -1,5 +1,6 @@
 package com.example.duanmau.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,5 +27,15 @@ public class ThanhvienDao {
             }while (cursor.moveToNext());
         }
         return list;
+    }
+    public boolean themThanhvien(String hoTen, String namSinh){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("hoTen",hoTen);
+        contentValues.put("namSinh",namSinh);
+        long check = sqLiteDatabase.insert("THANHVIEN",null,contentValues);
+        if (check == -1)
+            return  false;
+        return true;
     }
 }
