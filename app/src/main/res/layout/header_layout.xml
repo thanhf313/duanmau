@@ -10,9 +10,9 @@
         android:layout_height="100dp"
         android:src="@drawable/giphy"/>
     <TextView
+        android:id="@+id/txtGTten"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Xin chào "
         android:textColor="#57E3F4"
         android:textSize="24dp"/>
 </LinearLayout>

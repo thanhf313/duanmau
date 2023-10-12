@@ -7,6 +7,7 @@ public class Sach {
     private int maloai;
 
     private int soluongdamuonsach;
+    private String tenloai;
     public Sach() {
     }
 
@@ -25,6 +26,22 @@ public class Sach {
 
     public int getSoluongdamuonsach() {
         return soluongdamuonsach;
+    }
+
+    public Sach(int masach, String tensach, int giathue, int maloai, String tenloai) {
+        this.masach = masach;
+        this.tensach = tensach;
+        this.giathue = giathue;
+        this.maloai = maloai;
+        this.tenloai = tenloai;
+    }
+
+    public String getTenloai() {
+        return tenloai;
+    }
+
+    public void setTenloai(String tenloai) {
+        this.tenloai = tenloai;
     }
 
     public void setSoluongdamuonsach(int soluongdamuonsach) {

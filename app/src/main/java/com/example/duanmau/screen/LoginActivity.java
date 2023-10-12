@@ -32,12 +32,6 @@ public class LoginActivity extends AppCompatActivity {
                 String name = edtName.getText().toString();
                 String pass = edtPass.getText().toString();
                 if (thuThuDao.checkDN(name,pass)){
-                    // lưu sharedPreferences
-                    SharedPreferences sharedPreferences = getSharedPreferences("THONGTIN",MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("maTT",name);
-                    editor.commit();
-
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }else {
                     Toast.makeText(LoginActivity.this, "Tên đăng nhập và mật khẩu không đúng.", Toast.LENGTH_SHORT).show();

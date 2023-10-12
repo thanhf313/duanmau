@@ -14,7 +14,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // nơi tạo bảng
-        String thuThu = "CREATE TABLE THUTHU(maTT text primary key, hoTen text, matKhau text )";
+        String thuThu = "CREATE TABLE THUTHU(maTT text primary key, hoTen text, matKhau text, loaiTK TEXT )";
         db.execSQL(thuThu);
 
         String thanhVien ="CREATE TABLE THANHVIEN(maTV integer primary key autoincrement, hoTen text, namSinh text)";
@@ -35,7 +35,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "(1,'Thiếu nhi'), (2,'Tình cảm'),(3,'Phiêu lưu'),(4,'Hành động')");
         db.execSQL("insert into SACH values" +
                 "(1,'Thánh giống',10000,1),(2,'Titanic',30000,2),(3,'Qúa nhanh quá nguy hiểm',30200,4)");
-        db.execSQL("insert into THUTHU values ('thuthu01','nguyễn trung thành','abc123'),('thuthu02','Thành','abc123')");
+        db.execSQL("insert into THUTHU values ('thuthu01','nguyễn trung thành','abc123','ADMIN'),('thuthu02','Thành','abc123','THỦ THƯ')");
         db.execSQL("insert into THANHVIEN values(1,'Nguyễn Văn A','2000'),(2,'Nguyễn Thị C','2001'),(3,'Lê Thị L','2000')");
         // trả sách:1 đã trả,0 chưa trả
         db.execSQL("insert into PHIEUMUON values(1,1,'thuthu01',2,'19/02/2023',1,3500),(2,2,'thuthu02',3,'25/09/2023',0,5000),(3,1,'thuthu02',3,'05/10/2023',1,5000)");

@@ -88,7 +88,7 @@ public class QLThanhVienFragment extends Fragment {
         list = thanhvienDao.getDSThanhVien();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewTV.setLayoutManager(layoutManager);
-        adapter = new ThanhVienAdapter(getContext(),list);
+        adapter = new ThanhVienAdapter(getContext(),list,thanhvienDao);
         recyclerViewTV.setAdapter(adapter);
     }
 

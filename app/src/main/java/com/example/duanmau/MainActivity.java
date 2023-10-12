@@ -15,16 +15,19 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.duanmau.dao.SachDao;
 import com.example.duanmau.dao.ThuThuDao;
 import com.example.duanmau.fragment.QLLoaiSachFragment;
 import com.example.duanmau.fragment.QLPhieuMuonFragment;
+import com.example.duanmau.fragment.QLSachFragment;
 import com.example.duanmau.fragment.QLThanhVienFragment;
 import com.example.duanmau.fragment.ThongKeDoanhThuFragment;
 import com.example.duanmau.fragment.ThongKeTop10Fragment;
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout frameLayout = findViewById(R.id.frm);
         NavigationView navigationView = findViewById(R.id.nav);
         drawerLayout = findViewById(R.id.drawerLayout);
+        View headLayout = navigationView.getHeaderView(0);
+        TextView txtTen = findViewById(R.id.txtGTten);
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar(); //chuyển đổi actionBar thành toobar
@@ -73,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ThongKeDoanhThuFragment();
                 }else  if (item.getItemId() == R.id.QLThanhVien){
                     fragment = new QLThanhVienFragment();
+                } else  if (item.getItemId() == R.id.QLSach){
+                    fragment = new QLSachFragment();
                 }
                 else {
                     fragment = new QLPhieuMuonFragment();
@@ -83,8 +90,17 @@ public class MainActivity extends AppCompatActivity {
                 toolbar.setTitle(item.getTitle());
                 return false;
             }
-
         });
+        // hiện thị 1 so cn cho admin
+        SharedPreferences sharedPreferences = getSharedPreferences("THONGTIN",MODE_PRIVATE);
+        String loaiTK = sharedPreferences.getString("loaiTK","");
+        if (!loaiTK.equals("ADMIN")){
+            Menu menu = navigationView.getMenu();
+            menu.findItem(R.id.doanhThu).setVisible(false); // kh hiện thị
+            menu.findItem(R.id.top10).setVisible(false);
+        }
+        String hoten = sharedPreferences.getString("hoTen","");
+        txtTen.setText("Xin chào " + hoten);
     }
 
     @Override

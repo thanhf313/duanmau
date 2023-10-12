@@ -38,4 +38,27 @@ public class ThanhvienDao {
             return  false;
         return true;
     }
+    public boolean capnhapthongtinTV(int maTV,String hoTen,String namSinh){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("hoTen",hoTen);
+        contentValues.put("namSinh",namSinh);
+        long check = sqLiteDatabase.update("THANHVIEN",contentValues,"maTV=?",new String[]{String.valueOf(maTV)});
+        if (check == -1)
+            return false;
+        return true;
+    }
+    // 0: thất bại , 1: thành công, -1 : tìm thấy tv có phieu muobj
+    public int xoathongtinTv(int maTV){
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+       Cursor cursor = database.rawQuery("select * from PHIEUMUON WHERE maTv=?",new String[]{String.valueOf(maTV)});
+       if (cursor.getCount() != 0){
+           return  -1;
+       }
+
+       long check = database.delete("THANHVIEN","maTV=?",new String[]{String.valueOf(maTV)});
+        if (check ==-1)
+            return 0;
+        return 1;
+    }
 }
